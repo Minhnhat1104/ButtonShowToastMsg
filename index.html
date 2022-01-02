@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./decor.css">
+</head>
+<body>
+    <div id="toast">
+        <div class = "toast toast__Success">
+            <div class="toast__icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="toast__body">
+                <h2 class="toast__title">Success</h2>
+                <div class="toast__msg">
+                    Tham gia nhóm Học lập trình tại F8 trên Facebook để cùng nhau trao đổi trong quá trình học tập 
+                </div>
+            </div>
+            <div class="toast__close">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <div onclick="showSuccessToast();" class="btn btn--success">Show success toast</div>
+        <div onclick="showErrorToast();" class="btn btn--danger">Show error toast</div>
+    </div>
+
+    <script>
+        function toast({
+            title = '',
+            message = '',
+            type = 'info',
+            duration,
+        }) {
+            const main = document.getElementById('toast');
+        
+            if (main) {
+                const toast2 = document.createElement('div');
+                const icons = {
+                    success: 'fas fa-check-circle',
+                    info: 'fas fa-info-circle',
+                    warning: 'fas fa-exclamation-circle',
+                    error: 'fas fa-exclamation-circle',
+                }
+                const delay = (duration/1000).toFixed(2);
+
+                toast2.classList.add('toast', `toast__${type}`);
+                toast2.style.animation=`slideInLeft ease .5s, fadeOut linear 1s ${delay}s forwards;`
+
+                const icon = icons[type];
+                toast2.innerHTML=`
+                    <div class="toast__icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="toast__body">
+                        <h2 class="toast__title">${title}</h2>
+                        <div class="toast__msg">
+                            ${message}
+                        </div>
+                    </div>
+                    <div class="toast__close">
+                        <i class="fas fa-times"></i>
+                    </div>
+                `;
+                console.log(duration + 1500)
+                main.appendChild(toast2)
+                setTimeout(function() {
+                    main.removeChild(toast2)
+                    console.log("removed")
+                }, duration + 1500)
+            }
+        }
+
+        function showSuccessToast() {
+            toast({
+            title: 'Thành Công',
+            message: 'Bạn đã thành công',
+            type: 'success',
+            duration: 3000,
+            });
+        }
+
+
+        function showErrorToast() {
+            toast({
+            title: 'Thất Bại',
+            message: 'Có lỗi đã xảy ra.',
+            type: 'error',
+            duration: 3000,
+            });
+        }
+    </script>
+</body>
+</html>
