@@ -12,7 +12,7 @@ function toast({
             success: 'fas fa-check-circle',
             info: 'fas fa-info-circle',
             warning: 'fas fa-exclamation-circle',
-            error: 'fas fa-exclamation-circle',
+            error: 'fas fa-exclamation-triangle',
         }
         //auto remove toast
         const autoRemoveToast = setTimeout(function() {
@@ -33,7 +33,7 @@ function toast({
         const icon = icons[type];
         toast2.innerHTML=`
             <div class="toast__icon">
-                <i class="fas fa-check-circle"></i>
+                <i class="${icon}"></i>
             </div>
             <div class="toast__body">
                 <h2 class="toast__title">${title}</h2>
